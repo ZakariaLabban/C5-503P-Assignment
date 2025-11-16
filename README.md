@@ -79,6 +79,7 @@ project/
 │    ├── routing_server.py       # RoutingServer MCP implementation
 │    └── weather_server.py       # WeatherMapServer MCP implementation
 │── agent.py                     # Main AssistantAgent integration
+│── interactive_agent.py         # Interactive LLM-powered agent with chat interface
 │── tests/
 │    ├── __init__.py
 │    ├── test_geo.py             # Tests for GeoServer
@@ -121,7 +122,45 @@ python agent.py
 
 This will run example queries and demonstrate the routing capabilities.
 
-### Interactive Usage
+### Running the Interactive Agent
+
+The interactive agent provides an LLM-powered chat interface that intelligently routes queries to the appropriate MCP tools:
+
+```bash
+python interactive_agent.py
+```
+
+**Prerequisites for Interactive Agent:**
+
+1. **OpenAI API Key**: You need an OpenAI API key to use the interactive agent
+   - Create a `.env` file in the project root
+   - Add your API key: `OPENAI_API_KEY=your_key_here`
+   - The agent uses `gpt-4o-mini` by default (can be changed in code)
+
+2. **Install python-dotenv** (if not already installed):
+   ```bash
+   pip install python-dotenv
+   ```
+
+**Features:**
+- Natural language conversation interface
+- Intelligent query routing using LLM function calling
+- Automatic tool selection based on user queries
+- Multi-step workflows (e.g., geocoding a location before searching for POIs)
+- Real-time tool execution feedback
+
+**Example Interaction:**
+```
+You: Find cafes near AUB
+[LLM] Decided to use 2 tool(s):
+   -> geocode
+   -> search_poi
+[TOOL] Calling tool: geocode
+[TOOL] Calling tool: search_poi
+Assistant: I found 5 cafes near AUB (American University of Beirut)...
+```
+
+### Programmatic Usage
 
 You can also use the agent programmatically:
 
@@ -345,6 +384,23 @@ The assistant agent can handle natural language queries and route them to the ap
 ```
 
 ## 🔧 Configuration
+
+### Interactive Agent Setup
+
+To use the interactive agent, you need to set up your OpenAI API key:
+
+1. Create a `.env` file in the project root directory
+2. Add your OpenAI API key:
+   ```
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+3. Make sure `python-dotenv` is installed: `pip install python-dotenv`
+
+The interactive agent uses OpenAI's function calling feature to intelligently route queries to the appropriate MCP tools. It supports:
+- Multi-turn conversations
+- Automatic tool selection
+- Multi-step workflows (e.g., geocoding before POI search)
+- Real-time tool execution
 
 ### Using Real APIs
 
