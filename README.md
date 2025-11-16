@@ -42,7 +42,7 @@ All servers are integrated with a main `AssistantAgent` that automatically route
 ### Step 1: Clone or Navigate to Project Directory
 
 ```bash
-cd C5-Zakaria-Labban
+cd C5-503-Assignment
 ```
 
 ### Step 2: Install Dependencies
